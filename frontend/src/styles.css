@@ -10,5 +10,58 @@ canvas {
     display: block;
     margin: 0;
     padding: 0;
-    /* cursor: none; */
+    cursor: none;
+}
+
+#hudContainer {
+    display: flex;
+    flex-direction: column;
+    justify-items: start;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+    position: absolute; /* Added this to remove interference with canvas */
+    top: 0; /* Ensure it aligns correctly */
+    left: 0; /* Ensure it aligns correctly */
+    pointer-events: none; /* Optional: prevent HUD from blocking interactions with the canvas */
+}
+
+#hudTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    margin-top: 2%;
+    padding: 0;
+    height: 5%;
+    width: 100%;
+}
+
+#scoreBoard {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    padding: 0;
+    margin-right: 3%;
+    height: 80%;
+    width: 7%;
+    color: white;
+}
+
+#scoreText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    color: white;
+}
+
+
+#scoreIcon {
+    height: 100%;
+    width:auto;
+    aspect-ratio: 1;
 }
