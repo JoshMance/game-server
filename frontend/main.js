@@ -22,6 +22,10 @@ $(window).resize(() => game.scale.resize($(window).width(), $(window).height()))
 let player, healthBar, cursors, keyA, keyS, keyD, keyW, background;
 var coins = [];
 var enemies = [];
+
+var numCoins = 500;
+var numEnemies = 0;
+
 let playerState = "idleDown";
 let playerScore = 0;
 
@@ -137,16 +141,53 @@ function handleInput() {
 function handleEnemies() {
 
     for (let enemy of enemies) {
-        let speed = 50;
+        let speed = 100;
+        let sepDistance = 10;
 
         let dx = Math.sign(player.x - enemy.x);
         let dy = Math.sign(player.y - enemy.y);
+
+        for (let otherEnemy of enemies) {
+            if (enemy.id != otherEnemy.id) {
+                if (Math.abs(otherEnemy.x - enemy.x) <= sepDistance) {
+                    dy += 0.1
+                }
+                else if (Math.abs(otherEnemy.y - enemy.y) <= sepDistance) {
+                    dx += 0.1
+                }
+            }
+
+        }
     
         enemy.setVelocity(0);
         enemy.setVelocityX(speed*dx);
         enemy.setVelocityY(speed*dy);
     }
 
+}
+
+
+function handleCoins() {
+    for (let coin of coins) {
+
+        if (coin.found && !coin.collected) {
+            let speed = 400;
+
+            let dx = (player.x - coin.x);
+            let dy = (player.y - coin.y);
+
+            let ratio = dy/dx;
+
+            let u = speed/Math.sqrt(1+(ratio*ratio));
+
+            vx = u*Math.sign(dx);
+            vy = u*ratio*Math.sign(dx);
+        
+            coin.setVelocity(0);
+            coin.setVelocityX(vx);
+            coin.setVelocityY(vy);
+        }
+    }
 }
 
 
@@ -176,7 +217,7 @@ function create() {
     let healthBarHeight = 5;
     healthBar = this.add.graphics();
     healthBar.fillStyle(0x00ff00, 1); // Green color for full health
-    healthBar.fillRect(0, 0, healthBarWidth * (50 / 100), healthBarHeight);
+    healthBar.fillRect(-healthBarWidth/2, 0, healthBarWidth, healthBarHeight);
 
 
 
@@ -218,7 +259,7 @@ function create() {
         repeat: -1,
     });
     // Loading in all coins
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < numCoins; i++) {
         let coin = this.physics.add.sprite(Math.random() * width, Math.random() * height, "coin")
             .setOrigin(0, 0)
             .setDepth(-1);
@@ -238,9 +279,10 @@ function create() {
         repeat: -1,
     });
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < numEnemies; i++) {
         let enemy = this.physics.add.sprite(Math.random() * width, Math.random() * height, "enemy").setScale(2);
         enemy.anims.play("enemyMove");
+        enemy.id = i;
         enemies.push(enemy);
     }
 
@@ -251,18 +293,25 @@ function update() {
     healthBar.setPosition(player.x, player.y + 50)
 
     handleEnemies();
+    handleCoins();
 
-    const playerInteractionRadius = 30;
+    const findRadius = 100;
+    const collectRadius = 20;
+
     for (let coin of coins) {
-        if (!coin.found) {
+        if (!coin.collected) {
             let distance = euclideanDistance(coin.x, coin.y, player.x, player.y);
-            if (distance <= playerInteractionRadius) {
+            
+            if (distance <= findRadius) {
+                coin.found = true;
+            }
+            if (distance <= collectRadius) {
                 playerScore += 5;
                 coin.destroy();
-                coin.found = true;
-
+                coin.collected = true;
                 $("#scoreText").text(playerScore);
             }
+
         }
     }
 }
