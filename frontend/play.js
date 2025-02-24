@@ -1,4 +1,4 @@
-export function playGame() {
+export function play() {
 
     var width = $(window).width();
     var height = $(window).height();
@@ -21,7 +21,7 @@ export function playGame() {
     // Resize the game when the window is resized
     $(window).resize(() => game.scale.resize($(window).width(), $(window).height()));
 
-    let player, healthBar, cursors, keyA, keyS, keyD, keyW, keyLeft, keyDown, keyRight, keyUp, keySpace, background;
+    let player, healthBar, cursors, keyA, keyS, keyD, keyW, keyLeft, keyDown, keyRight, keyUp, keySpace, pointer, background;
     var coins = [];
     var enemies = [];
 
@@ -84,7 +84,7 @@ export function playGame() {
         }
 
 
-        if (keySpace.isDown) {
+        if (pointer.leftButtonDown()) {
             // Storing the current animation before attacking
             let previousAnim = player.anims.currentAnim ? player.anims.currentAnim.key : "idleDown";
         
@@ -212,6 +212,7 @@ export function playGame() {
         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        pointer = this.input.activePointer;
 
         background = this.add.tileSprite(0, 0, width, height, "background").setOrigin(0, 0).setDepth(-1);
 

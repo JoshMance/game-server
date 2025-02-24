@@ -1,4 +1,4 @@
-import { playGame } from './playGame.js';
+import { play } from './play.js';
 
 // The abstract states in which the app can be in
 // mapped to their page div ids
@@ -34,7 +34,7 @@ $(document).ready(function() {
 
     $("#playButton").click(function() {
         showState(STATE.GAME);
-        playGame();
+        play();
     });
 
     $(document).on("keydown", function(event) {
