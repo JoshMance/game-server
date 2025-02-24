@@ -194,10 +194,10 @@ export function play() {
 
 
     function preload() {
-        this.load.spritesheet("player", "./src/spritepacks/mystic-woods/sprites/characters/player.png", { frameWidth: 48, frameHeight: 48 });
-        this.load.spritesheet("coin", "./src/spritepacks/coin1_16x16.png", { frameWidth: 16, frameHeight: 16 });
-        this.load.spritesheet("enemy", "./src/spritepacks/redSlime.png", { frameWidth: 16, frameHeight: 32 });
-        this.load.image("background", "/frontend/src/textures/temp.png");
+        this.load.spritesheet("player", "/player.png", { frameWidth: 48, frameHeight: 48 });
+        this.load.spritesheet("coin", "/coin.png", { frameWidth: 16, frameHeight: 16 });
+        this.load.spritesheet("enemy", "/slime.png", { frameWidth: 16, frameHeight: 32 });
+        this.load.image("background", "/background.png");
     }
 
     function create() {
