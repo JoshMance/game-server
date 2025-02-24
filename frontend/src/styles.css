@@ -1,4 +1,4 @@
-html, body, #homeScreen, #gameScreen {
+html, body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -6,8 +6,9 @@ html, body, #homeScreen, #gameScreen {
     overflow: hidden; /* Prevent scrollbars */
 }
 
-h3 {
+h1, h2, h3 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    scale: 1.5;
 }
 
 @keyframes pulse {
@@ -16,9 +17,13 @@ h3 {
       opacity: 1;
     }
     50% {
-      transform: scale(1.1);
-      opacity: 0.7;
-    }
+      transform: scale(1.05);
+      opacity: 0.85;
+      -webkit-transform: scale(1.05);
+      -moz-transform: scale(1.05);
+      -ms-transform: scale(1.05);
+      -o-transform: scale(1.05);
+}
     100% {
       transform: scale(1);
       opacity: 1;
@@ -30,13 +35,10 @@ display: inline-block;
 animation: pulse 1.5s infinite ease-in-out;
 }
 
-  #homeScreen, #errorScreen, #gameScreen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+canvas {
+    background-color: blue;
 }
+
 
 #errorScreen {
     z-index: -2;
@@ -44,31 +46,22 @@ animation: pulse 1.5s infinite ease-in-out;
 }
 
 #homeScreen {
-    z-index: 1;
-    background-color: black;
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #056124;
+    color: white;
 }
 
 #gameScreen {
     z-index: 0;
-    background-color: greenyellow;
-    display: block;
-    margin: 0;
-    padding: 0;
-    cursor: none;
-}
-
-#playNowButton {
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
-    color: white;
-}
-
-#hudContainer {
     display: flex;
     flex-direction: column;
     justify-items: start;
@@ -83,7 +76,67 @@ animation: pulse 1.5s infinite ease-in-out;
     pointer-events: none;
 }
 
-#hudTop {
+#brandName {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: white;
+}
+
+#playButton {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: white;
+}
+
+
+#homeScreen > .banner {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: min-content;
+    width: 100%;
+    margin-top: 3%;
+    z-index: 3;
+    padding: 0;
+}
+
+#homeScreen > .content {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    padding: 0;
+    height: 90%;
+    width: 100%;
+}
+
+#homeScreen > .footer {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: end;
+    z-index: 3;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#homeScreen > .footer > button {
+    margin: 2%;
+    background-color: inherit;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+}
+
+#gameScreen > .banner {
     display: flex;
     flex-direction: row;
     justify-content: end;
@@ -93,6 +146,7 @@ animation: pulse 1.5s infinite ease-in-out;
     height: 5%;
     width: 100%;
 }
+
 
 #scoreBoard {
     display: flex;

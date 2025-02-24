@@ -1,7 +1,5 @@
 import { playGame } from './playGame.js';
 
-
-
 // The abstract states in which the app can be in
 // mapped to their page div ids
 // Each page fills the entire screen
@@ -34,14 +32,14 @@ $(document).ready(function() {
 
     showState(STATE.HOME);
 
-    $("#playNowButton").click(function() {
+    $("#playButton").click(function() {
         showState(STATE.GAME);
+        playGame();
     });
 
     $(document).on("keydown", function(event) {
         if (event.key === "Escape" && (currentState == STATE.GAME)) {
             showState(STATE.HOME);
-
         }
     });
 

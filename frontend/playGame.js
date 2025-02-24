@@ -1,6 +1,5 @@
 export function playGame() {
 
-
     var width = $(window).width();
     var height = $(window).height();
 
@@ -22,7 +21,7 @@ export function playGame() {
     // Resize the game when the window is resized
     $(window).resize(() => game.scale.resize($(window).width(), $(window).height()));
 
-    let player, healthBar, cursors, keyA, keyS, keyD, keyW, background;
+    let player, healthBar, cursors, keyA, keyS, keyD, keyW, keyLeft, keyDown, keyRight, keyUp, keySpace, background;
     var coins = [];
     var enemies = [];
 
@@ -183,8 +182,8 @@ export function playGame() {
 
                 let u = speed/Math.sqrt(1+(ratio*ratio));
 
-                vx = u*Math.sign(dx);
-                vy = u*ratio*Math.sign(dx);
+                let vx = u*Math.sign(dx);
+                let vy = u*ratio*Math.sign(dx);
             
                 item.setVelocity(0);
                 item.setVelocityX(vx);
@@ -202,6 +201,7 @@ export function playGame() {
     }
 
     function create() {
+
         // Setting keyboard input bindings
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
