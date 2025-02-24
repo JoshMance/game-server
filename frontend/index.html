@@ -9,14 +9,24 @@
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.js"></script>
 </head>
 <body>
-    <script src="main.js"></script>
-    <div id="hudContainer"> 
-        <div id="hudTop"> 
-            <div id="scoreBoard">
-                <div id="scoreText">
-                    0
+    <script src="main.js" type="module" ></script>
+    
+    <div id="errorScreen">
+    </div>
+
+    <div id="homeScreen">
+        <button id="playNowButton" class="pulse"><h1> Play Now! </h1> </button>
+    </div>
+
+    <div id="gameScreen">
+        <div id="hudContainer">
+            <div id="hudTop">
+                <div id="scoreBoard">
+                    <div id="scoreText">
+                        0
+                    </div>
+                    <img id="scoreIcon" src="./src/spritepacks/coin1.png"></img>
                 </div>
-                <img id="scoreIcon" src="./src/spritepacks/coin1.png"></img>
             </div>
         </div>
     </div>
